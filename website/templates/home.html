@@ -1,9 +1,39 @@
 {% extends 'base.html' %}
 
 {%  block content %}
-    <div class="col-md-6 offset-md-3">
         {% if user.is_authenticated %}
         <h1>Welcome {{ user.username }}</h1>
+            <br/>
+            <h2>Recent expenses:</h2>
+
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">In/Out</th>
+                  <th scope="col">Amount</th>
+                </tr>
+              </thead>
+                <tbody>
+                    {% if records %}
+                        {% for record in records %}
+                            <tr>
+                                <td>{{ record.created_at }}</td>
+                                <td>{{ record.description }}</td>
+                                <td>{% if record.income %}
+                                    In
+                                {% else %}
+                                    Out
+                                {% endif %}</td>
+                                <td>{{ record.amount }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+                </tr>
+
         {% else %}
 
         <h1>Login</h1>
@@ -21,7 +51,6 @@
             </form>
         </form>
     {% endif %}
-    </div>
 
 
 {% endblock %}

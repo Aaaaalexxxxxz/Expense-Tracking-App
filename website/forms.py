@@ -29,3 +29,8 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].label = ""
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
 
+
+class add_expenses(forms.Form):
+    descrption = forms.CharField(label="",max_length=100,widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Expense Description'}))
+    income = forms.BooleanField(label="",required=True,widget=forms.CheckboxInput(attrs={'class':'form-check-input'}))
+    amount = forms.DecimalField(label="",max_digits=10,decimal_places=2,widget=forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Expense Amount'}))
