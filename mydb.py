@@ -1,3 +1,7 @@
+#installed mysql
+#install mysql connector/python
+
+
 import mysql.connector
 
 database = mysql.connector.connect(
@@ -8,6 +12,6 @@ database = mysql.connector.connect(
 
 curserObject = database.cursor()
 
-curserObject.execute("CREATE DATABASE EXPENSEAPP")
+curserObject.execute("CREATE DATABASE expenseapp")
 
 print("Expense app database created successfully...")

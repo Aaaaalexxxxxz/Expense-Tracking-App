@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'website',
 ]
 
 MIDDLEWARE = [
@@ -75,10 +76,15 @@ WSGI_APPLICATION = 'expense_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'expenseapp',  # Database name from MySQL
+        'USER': 'root',     # MySQL username
+        'PASSWORD': '20050807',  # MySQL password
+        'HOST': '127.0.0.1',           # Use 'localhost' or '127.0.0.1'
+        'PORT': '3306',                # Default MySQL port
     }
 }
+
 
 
 # Password validation
