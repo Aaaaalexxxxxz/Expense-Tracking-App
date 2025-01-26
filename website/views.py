@@ -44,17 +44,19 @@ def register_user(request):
 
 	return render(request, 'register.html', {'form':form})
 
-def add_expense(request):
+
+
+def delete_record(request, pk):
     if request.user.is_authenticated:
-        if request.method == "POST":
-            expense_name = request.POST['expense_name']
-            expense_amount = request.POST['expense_amount']
-            expense_date = request.POST['expense_date']
-            expense_category = request.POST['expense_category']
-            new_expense = Record(expense_name=expense_name, expense_amount=expense_amount, expense_date=expense_date, expense_category=expense_category)
-            new_expense.save()
-            messages.success(request, 'Expense added successfully!')
-            return redirect('home')
-    else:
-        messages.success(request, 'You must be logged in to add an expense!')
+        delete_it = Record.objects.get(id=pk)
+        delete_it.delete()
+        messages.success(request, 'Record deleted successfully...')
         return redirect('home')
+    else:
+        messages.success(request, 'You must be logged in to delete a record!')
+        return redirect('home')
+
+
+def add_record(request):
+    if request.user.is_authenticated:
+        return render(request, 'add_record.html', {})

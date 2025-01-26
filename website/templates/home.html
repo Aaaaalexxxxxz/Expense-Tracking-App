@@ -1,18 +1,31 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+<script>
+    function confirmDelete(recordId) {
+        let isConfirmed =  confirm("Are you sure you want to delete this record?");
+    }
+    if (isConfirmed) {
+        window.location.href = "/delete_record/${recordId}/";
+    }
+</script>
 {% extends 'base.html' %}
 
 {%  block content %}
         {% if user.is_authenticated %}
         <h1>Welcome {{ user.username }}</h1>
+            <button class="btn btn-primary add_expense_button" type="button" href = "{% url 'add_record' %}">Add record</button>
             <br/>
             <h2>Recent expenses:</h2>
-
             <table class="table table-striped table-hover">
               <thead>
                 <tr>
-                  <th scope="col">Date</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">In/Out</th>
-                  <th scope="col">Amount</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Catagory</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">In/Out</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Action</th>
                 </tr>
               </thead>
                 <tbody>
@@ -20,6 +33,7 @@
                         {% for record in records %}
                             <tr>
                                 <td>{{ record.created_at }}</td>
+                                <td>{{ record.catagory }}</td>
                                 <td>{{ record.description }}</td>
                                 <td>{% if record.income %}
                                     In
@@ -27,13 +41,13 @@
                                     Out
                                 {% endif %}</td>
                                 <td>{{ record.amount }}</td>
+                                <td><a href="javascript:void(0)" onclick="confirmDelete({{ record.id }})" class = "btn btn-danger btn-hover" style = "color:white"><i class="fa fa-trash"></i></a></td>
                             </tr>
                         {% endfor %}
                     {% endif %}
                 </tbody>
             </table>
-                </tr>
-
+            </tr>
         {% else %}
 
         <h1>Login</h1>
