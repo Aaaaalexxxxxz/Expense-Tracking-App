@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{%  block content %}
+    <script>
+        // JavaScript to dynamically insert the current month
+        document.addEventListener("DOMContentLoaded", function() {
+            const currentDate = new Date();  // Get current date
+            const monthNames = [
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+            const currentMonth = monthNames[currentDate.getMonth()];  // Get current month's name
+            document.getElementById("current-month").innerText = currentMonth;  // Output month!
+        });
+    </script>
+    <div class="col-md-6 offset-md-3">
+        <h1>Your Expense Report for <span id="current-month"></span></h1>
+
+    </div>
+{% endblock %}

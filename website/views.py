@@ -71,3 +71,17 @@ def add_record(request):
     else:
         messages.success(request, 'You must be logged in to add a record!')
         return redirect('home')
+
+def add_recuring_record(request):
+
+def report(request):
+    records = Record.objects.all()
+    if request.user.is_authenticated:
+        outcome, expense = 0, 0
+        for record in records:
+            if record.income == "Expense":
+                expense += record.amount
+            else:
+                outcome += record.amount
+        return render(request, 'report.html', {'records':records, 'outcome':outcome, 'expense':expense})
+    return render(request, 'report.html', {'records':records})

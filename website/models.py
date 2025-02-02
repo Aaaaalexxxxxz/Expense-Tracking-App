@@ -32,3 +32,6 @@ class Record(models.Model):
         return (f"{self.created_at}  {self.description}")
 
 # Create your models here.
+
+class monthly_record(models.Model):
+    date = models.DateField(default=date.today)

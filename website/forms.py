@@ -43,3 +43,5 @@ class add_record_form(forms.ModelForm):
     class Meta:
         model = Record
         exclude = ("user","userid")
+
+class add_recuring_record_form(forms.ModelForm):
