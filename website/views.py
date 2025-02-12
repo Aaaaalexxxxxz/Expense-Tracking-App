@@ -1,8 +1,12 @@
+from datetime import date
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm, add_record_form
-from .models import Record
+from .models import Record, monthly_record
+from celery import shared_task
+from datetime import date, timedelta
 def home(request):
     # check to see if logging in
     records = Record.objects.all()
@@ -72,10 +76,9 @@ def add_record(request):
         messages.success(request, 'You must be logged in to add a record!')
         return redirect('home')
 
-def add_recuring_record(request):
-
 def report(request):
     records = Record.objects.all()
+    month_report = monthly_record.objects.all()
     if request.user.is_authenticated:
         outcome, expense = 0, 0
         for record in records:
@@ -85,3 +88,10 @@ def report(request):
                 outcome += record.amount
         return render(request, 'report.html', {'records':records, 'outcome':outcome, 'expense':expense})
     return render(request, 'report.html', {'records':records})
+
+def view_recurring_records(request):
+    recurring_record = Records.objects.filter(recurrance =['Weekly', 'Biweekly', 'Monthly'] )
+
+#def delete_recurring_record(request, pk):
+
+

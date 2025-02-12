@@ -40,8 +40,8 @@ class add_record_form(forms.ModelForm):
         widget=forms.Select(attrs={'class': 'form-select'})  # Bootstrap-compatible dropdown
     )
     amount = forms.DecimalField(label="",max_digits=10,decimal_places=2,widget=forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Expense Amount'}))
+
     class Meta:
         model = Record
-        exclude = ("user","userid")
+        exclude = ("user","userid","next_occurance")
 
-class add_recuring_record_form(forms.ModelForm):

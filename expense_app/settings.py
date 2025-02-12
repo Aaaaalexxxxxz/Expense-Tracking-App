@@ -11,6 +11,22 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+
+# Store Celery task results in Django database
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+# Timesone for Celery
+CELERY_TIMEZONE = 'UTC'
+
+# Import tasks from all installed apps
+CELERY_ENABLE_UTC = True
+
+# Celery configuration
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'website',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
